@@ -1,30 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { lightningChart } from '@arction/lcjs';
+import { Component, OnInit, Input, AfterViewInit, OnChanges, OnDestroy } from '@angular/core';
+import { lightningChart, ChartXY, Point, LineSeries } from '@arction/lcjs';
 
 @Component({
   selector: 'app-chart',
-  templateUrl: './chart.component.html'
+  template: '<div [id]="this.id"></div>',
+  styles: ['div { height: 100% }']
 })
 
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  chart: ChartXY;
+  lineSeries: LineSeries;
+  id: number;
 
-  constructor() { }
+  @Input() points: Point[];
+
+  constructor() {}
+
+  ngOnChanges() {
+    // Generate random ID to us as the containerId for the chart and the target div id
+    this.id = Math.trunc(Math.random() * 1000000);
+  }
 
   ngOnInit() {
+    console.log('The component is initialized')
+  }
+
+  ngAfterViewInit() {
     // Create chartXY
-    const chart = lightningChart().ChartXY();
+    this.chart = lightningChart().ChartXY({containerId: `${this.id}`});
     // Set chart title
-    chart.setTitle('Getting Started');
+    this.chart.setTitle('Getting Started');
     // Add line series to the chart
-    const lineSeries = chart.addLineSeries();
+    this.lineSeries = this.chart.addLineSeries();
     // Set stroke style of the line
-    lineSeries.setStrokeStyle((style) => style.setThickness(5));
+    this.lineSeries.setStrokeStyle((style) => style.setThickness(5));
     // Add data point to the line series
-    lineSeries.add([
-      { x: 0, y: 0 },
-      { x: 1, y: 7 },
-      { x: 2, y: 3 },
-      { x: 3, y: 10 }
-    ]);
+    this.lineSeries.add(this.points);
+  }
+
+  ngOnDestroy() {
+    // "dispose" should be called when the component is unmounted to free all the resources used by the chart
+    this.lineSeries.dispose();
   }
 }

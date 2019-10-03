@@ -15,4 +15,5 @@ import { ChartComponent } from './chart/chart.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {}

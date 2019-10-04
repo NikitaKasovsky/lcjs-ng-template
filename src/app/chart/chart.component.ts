@@ -3,13 +3,13 @@ import { lightningChart, ChartXY, Point } from '@arction/lcjs';
 
 @Component({
   selector: 'app-chart',
-  template: '<div [id]="this.id"></div>',
+  template: '<div [id]="this.chartId"></div>',
   styles: ['div { height: 100% }']
 })
 
 export class ChartComponent implements OnChanges, OnDestroy, AfterViewInit {
   chart: ChartXY;
-  id: number;
+  chartId: number;
 
   @Input() points: Point[];
 
@@ -17,12 +17,12 @@ export class ChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   ngOnChanges() {
     // Generate random ID to us as the containerId for the chart and the target div id
-    this.id = Math.trunc(Math.random() * 1000000);
+    this.chartId = Math.trunc(Math.random() * 1000000);
   }
 
   ngAfterViewInit() {
     // Create chartXY
-    this.chart = lightningChart().ChartXY({containerId: `${this.id}`});
+    this.chart = lightningChart().ChartXY({containerId: `${this.chartId}`});
     // Set chart title
     this.chart.setTitle('Getting Started');
     // Add line series to the chart

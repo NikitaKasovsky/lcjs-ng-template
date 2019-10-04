@@ -1,4 +1,8 @@
-# LcjsNgTemplate
+# LightningChart<sup>&#174;</sup> JS Angular usage example
+
+This repository showcases how to integrate LightingChart<sup>&#174;</sup> JS charting library to an Angular application.
+
+More information about LightningChart<sup>&#174;</sup> JS can be found from our website, https://www.arction.com/lightningchart-js/.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
 

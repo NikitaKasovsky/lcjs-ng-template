@@ -19,7 +19,7 @@
             "allowedCommonJsDependencies": [
               "@arction/lcjs"
             ],
-            "outputPath": "dist/lcjs-ng-template",
+            "outputPath": "docs",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
